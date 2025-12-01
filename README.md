@@ -58,19 +58,32 @@ This project is fully containerized to ensure a consistent environment (Ubuntu 2
 
 ### Quick Start
 
--   Build and Start the Container: Run the following command in the root directory to build the image and start the environment:
+-   1 - Build and Start the Container: Run the following command in the root directory to build the image and start the environment:
 
 ``` bash
 docker-compose up -d --build
 ```
 
--   Access the Development Environment: Enter the running container shell:
+-   2 - Access the Development Environment: Enter the running container shell:
 
 ``` bash
 docker exec -it havadash_dev_env bash
 ```
 
-Launch the System: Inside the container, execute the launch file to start both the simulation and the bridge nodes:
+-   3 - Build the Workspace (Important for First Run): Inside the container, you must build the package and source the environment to make ROS 2 commands available:
+
+``` bash
+# 3.1. Load ROS 2 Humble environment
+source /opt/ros/humble/setup.bash
+
+# 3.2. Build the package using colcon
+colcon build
+
+# 3.3. Source the local workspace overlay
+source install/setup.bash
+```
+
+-   4 - Launch the System: Inside the container, execute the launch file to start both the simulation and the bridge nodes:
 
 ``` bash
 ros2 launch havadash_bridge havadash_launch.py
