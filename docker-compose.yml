@@ -1,0 +1,12 @@
+version: '3.8'
+
+services:
+  havadash_node:
+    build: .
+    container_name: havadash_dev_env
+    volumes:
+      - ./src:/ros2_ws/src
+    environment:
+      - ROS_DOMAIN_ID=0
+    network_mode: host
+    command: tail -f /dev/null
